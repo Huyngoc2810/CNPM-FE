@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HT LUXURY - Tìm kiếm phòng</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="logo">HT LUXURY</a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home">Trang chủ</a>
+        <a href="#rooms">Phòng</a>
+        <a href="#services">Dịch vụ</a>
+        <a href="#contact">Liên hệ</a>
+      </nav>
+
+      <button class="login-btn" type="button">Đăng nhập</button>
+      <button class="menu-btn" id="menuBtn" type="button">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-overlay">
+        <div class="container hero-content">
+          <span class="label">Khách sạn cao cấp HT LUXURY</span>
+          <h1>Không gian nghỉ dưỡng sang trọng cho kỳ nghỉ của bạn</h1>
+          <p>
+            Tìm kiếm phòng theo loại phòng, khoảng giá, ngày lưu trú và số lượng khách.
+            Dữ liệu phòng có thể lấy từ MySQL thông qua PHP API.
+          </p>
+
+          <form class="hero-search" id="heroSearchForm">
+            <div class="field">
+              <label>Ngày nhận</label>
+              <input type="date" id="heroCheckin" />
+            </div>
+
+            <div class="field">
+              <label>Ngày trả</label>
+              <input type="date" id="heroCheckout" />
+            </div>
+
+            <div class="field">
+              <label>Số khách</label>
+              <input type="number" id="heroGuests" min="1" max="8" value="2" />
+            </div>
+
+            <button class="btn" type="submit">Tìm phòng</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro" id="services">
+      <div class="container intro-grid">
+        <div>
+          <span class="label">Tổng quan</span>
+          <h2>Trải nghiệm lưu trú chuẩn cao cấp</h2>
+          <p>
+            Website mô phỏng chức năng tìm kiếm phòng theo tài liệu SRS HT LUXURY.
+            Người dùng có thể lọc phòng theo nhiều tiêu chí và xem kết quả phù hợp.
+          </p>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature-card">
+            <span>🏨</span>
+            <h3>Đa dạng loại phòng</h3>
+            <p>Deluxe, Premier Suite, Presidential, Family, Superior.</p>
+          </div>
+
+          <div class="feature-card">
+            <span>🔎</span>
+            <h3>Tìm kiếm nhanh</h3>
+            <p>Lọc theo từ khóa, giá, ngày ở và số lượng khách.</p>
+          </div>
+
+          <div class="feature-card">
+            <span>📱</span>
+            <h3>Responsive</h3>
+            <p>Giao diện tối ưu cho desktop, tablet và điện thoại.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rooms" id="rooms">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="label">Tìm kiếm phòng</span>
+            <h2>Danh sách phòng phù hợp</h2>
+          </div>
+
+          <p id="resultCount">Đang tải dữ liệu phòng...</p>
+        </div>
+
+        <div class="room-layout">
+          <aside class="filter-panel">
+            <h3>Bộ lọc</h3>
+
+            <form id="filterForm">
+              <div class="field">
+                <label>Từ khóa</label>
+                <input type="text" id="keywordInput" placeholder="Deluxe, Suite, Ocean..." />
+              </div>
+
+              <div class="field">
+                <label>Loại phòng</label>
+                <select id="typeFilter">
+                  <option value="all">Tất cả</option>
+                  <option value="Deluxe">Deluxe</option>
+                  <option value="Premier Suite">Premier Suite</option>
+                  <option value="Presidential">Presidential</option>
+                  <option value="Family">Family</option>
+                  <option value="Superior">Superior</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Giá thấp nhất</label>
+                <input type="number" id="minPrice" min="0" step="100000" placeholder="1000000" />
+              </div>
+
+              <div class="field">
+                <label>Giá cao nhất</label>
+                <input type="number" id="maxPrice" min="0" step="100000" placeholder="6000000" />
+              </div>
+
+              <div class="field">
+                <label>Ngày nhận</label>
+                <input type="date" id="checkinInput" />
+              </div>
+
+              <div class="field">
+                <label>Ngày trả</label>
+                <input type="date" id="checkoutInput" />
+              </div>
+
+              <div class="field">
+                <label>Số khách</label>
+                <input type="number" id="guestsInput" min="1" max="8" value="2" />
+              </div>
+
+              <div class="filter-actions">
+                <button class="btn" type="submit">Áp dụng</button>
+                <button class="btn btn-light" id="resetBtn" type="button">Xóa lọc</button>
+              </div>
+            </form>
+          </aside>
+
+          <div class="room-content">
+            <div class="alert" id="messageBox"></div>
+            <div class="room-grid" id="roomGrid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <span class="label">Liên hệ</span>
+          <h2>HT LUXURY</h2>
+          <p>Địa chỉ: 01 Luxury Avenue, TP. Hồ Chí Minh</p>
+          <p>Hotline: 0123 456 789</p>
+          <p>Email: booking@htluxury.vn</p>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <input type="text" placeholder="Họ và tên" required />
+          <input type="email" placeholder="Email" required />
+          <input type="text" placeholder="Nhu cầu hỗ trợ" />
+          <textarea rows="5" placeholder="Nội dung"></textarea>
+          <button class="btn" type="submit">Gửi liên hệ</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>HT LUXURY</h3>
+        <p>Website demo fullstack: Front-end, Back-end PHP và Database MySQL.</p>
+      </div>
+
+      <div>
+        <h4>Thông tin báo cáo</h4>
+        <p>Họ tên: ................................</p>
+        <p>MSSV: ................................</p>
+        <p>Lớp: ................................</p>
+        <p>Đề tài: Tìm kiếm phòng khách sạn</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Chi tiết phòng</h2>
+        <button class="close-btn" id="closeModalBtn" type="button">×</button>
+      </div>
+
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Thông báo</div>
+
+  <script src="JS/script.js"></script>
+</body>
+</html>
